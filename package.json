@@ -1,0 +1,13 @@
+{
+  "name": "PubSub",
+  "version": "1.0.0",
+  "description": "A JS pub/sub implementation",
+  "main": "PubSub.js",
+  "author": "Hans Christian Reinl <info@drublic.de> (https://drublic.de/)",
+  "scripts": {
+    "test": "jasmine"
+  },
+  "devDependencies": {
+    "jasmine": "^2.1.1"
+  }
+}
