@@ -54,7 +54,9 @@ void function (global) {
     }
 
     for (; i < functions.length; i++) {
-      PubSub._storage[type].push(functions[i]);
+      if (typeof(functions[i]) === 'function') {
+        PubSub._storage[type].push(functions[i]);
+      }
     }
   };
 
