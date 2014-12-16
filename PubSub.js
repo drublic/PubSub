@@ -61,7 +61,7 @@ void function (global) {
   };
 
   /**
-   * Unsubscribe a functions form an event
+   * Unsubscribe functions from an event
    * @param  {String}         type      Event type
    * @param  {Function|Array} functions Functions to unsubscribe from event
    * @return {void}
