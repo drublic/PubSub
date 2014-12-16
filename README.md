@@ -1,9 +1,13 @@
-# PubSub
+# PubSub - vanilla-pubsub
 
 [![Build Status](https://api.travis-ci.org/drublic/PubSub.svg)](http://travis-ci.org/drublic/PubSub)
 
 PubSub is a JS implementation of a publication/subscription pattern in JS
 using vanilla JS.
+
+## Install
+
+    npm install --save vanilla-pubsub
 
 ## Usage
 
