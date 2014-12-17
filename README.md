@@ -11,7 +11,7 @@ using vanilla JS.
 
 ## Usage
 
-Subscibe
+Subscribe
 
     PubSub.subscribe('App.loaded', function () {});
     PubSub.subscribe('App.done', [App.loadStack, App.clock]);
