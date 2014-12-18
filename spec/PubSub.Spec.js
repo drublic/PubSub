@@ -13,7 +13,7 @@ describe('PubSub', function () {
 
   it('subscribes function', function () {
     var fn = function () {};
-    var fn2 = function () {};
+    var fn2 = function (arg1, arg2) {};
 
     expect(PubSub._storage.fn).toBe(undefined);
 

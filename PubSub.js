@@ -44,7 +44,7 @@ void function (global) {
     var i = 0;
 
     // If `functions` is not an array, make it one
-    if (!functions.length) {
+    if (typeof functions === 'function') {
       functions = [functions];
     }
 
