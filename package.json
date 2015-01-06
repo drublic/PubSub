@@ -4,6 +4,10 @@
   "description": "A JS pub/sub implementation",
   "main": "PubSub.js",
   "author": "Hans Christian Reinl <info@drublic.de> (https://drublic.de/)",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/drublic/PubSub.git"
+  },
   "scripts": {
     "test": "jasmine"
   },
