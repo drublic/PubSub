@@ -15,12 +15,15 @@ Subscribe
 
     PubSub.subscribe('App.loaded', function () {});
     PubSub.subscribe('App.done', [App.loadStack, App.clock]);
+    PubSub.subscribe(['App.undo', 'App.redo'], App.change);
 
 Unsubscribe
 
     PubSub.unsubscribe('App.done', App.loadStack);
+    PubSub.unsubscribe(['App.undo', 'App.redo'], App.change);
 
 Publish
 
     PubSub.publish('App.loaded');
     PubSub.publish('App.loaded', { data: App.data });
+    PubSub.publish(['App.undo', 'App.redo']);

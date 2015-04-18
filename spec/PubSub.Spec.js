@@ -7,6 +7,10 @@
 var PubSub = require('../PubSub');
 
 describe('PubSub', function () {
+  beforeEach(function () {
+    PubSub._storage = {};
+  });
+
   it('exisits', function () {
     expect(PubSub).not.toBe(undefined);
   });
@@ -31,6 +35,22 @@ describe('PubSub', function () {
     PubSub.subscribe('array', fns);
 
     expect(PubSub._storage.array).toEqual(fns);
+  });
+
+  it('subscribes to multiple events', function () {
+    var fn = function () {};
+    var fn2 = function (arg1, arg2) {};
+
+    expect(PubSub._storage.fn1).toBe(undefined);
+    expect(PubSub._storage.fn2).toBe(undefined);
+
+    PubSub.subscribe(['fn1', 'fn2'], fn);
+    expect(PubSub._storage.fn1).toEqual([fn]);
+    expect(PubSub._storage.fn2).toEqual([fn]);
+
+    PubSub.subscribe(['fn1', 'fn2'], fn2);
+    expect(PubSub._storage.fn1).toEqual([fn, fn2]);
+    expect(PubSub._storage.fn2).toEqual([fn, fn2]);
   });
 
   it('unsubscribes function', function () {
@@ -59,6 +79,22 @@ describe('PubSub', function () {
 
     expect(PubSub._storage.unsubscribeArray).toEqual([]);
   });
+
+  it('unsubscribes multiple events', function () {
+    var fn = function () {};
+
+    expect(PubSub._storage.un1).toBe(undefined);
+    expect(PubSub._storage.un2).toBe(undefined);
+
+    PubSub.subscribe(['un1', 'un2'], fn);
+    expect(PubSub._storage.un1).toEqual([fn]);
+    expect(PubSub._storage.un2).toEqual([fn]);
+
+    PubSub.unsubscribe(['un1', 'un2'], fn);
+    expect(PubSub._storage.un1).toEqual([]);
+    expect(PubSub._storage.un2).toEqual([]);
+  });
+
 
   it('publishes events', function () {
     this.fn = function () {};

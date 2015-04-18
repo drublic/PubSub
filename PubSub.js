@@ -7,13 +7,16 @@
  * Subscibe:
  *   PubSub.subscribe('App.loaded', function () {});
  *   PubSub.subscribe('App.done', [App.loadStack, App.clock]);
+ *   PubSub.subscribe(['App.undo', 'App.redo'], App.change);
  *
  * Unsubscribe:
  *   PubSub.unsubscribe('App.done', App.loadStack);
+ *   PubSub.unsubscribe(['App.undo', 'App.redo'], App.change);
  *
  * Publish:
  *   PubSub.publish('App.loaded');
  *   PubSub.publish('App.loaded', { data: App.data });
+ *   PubSub.publish(['App.undo', 'App.redo']);
  *
  */
 void function (global) {
@@ -36,54 +39,74 @@ void function (global) {
 
   /**
    * Subscribe funtions by mapping them to events
-   * @param  {String}         type      Event type
+   * @param  {String|Array}   types     Event type
    * @param  {Function|Array} functions Function or array of functions to subscribe to event
    * @return {void}
    */
-  PubSub.subscribe = function (type, functions) {
+  PubSub.subscribe = function (types, functions) {
     var i = 0;
+    var j = 0;
+
+    // If `types` is not an array, make it one
+    if (typeof types === 'string') {
+      types = [types];
+    }
 
     // If `functions` is not an array, make it one
     if (typeof functions === 'function') {
       functions = [functions];
     }
 
-    // Add subsciption name to storage
-    if (!PubSub._storage[type]) {
-      PubSub._storage[type] = [];
-    }
+    for (; i < types.length; i++) {
+      type = types[i];
 
-    for (; i < functions.length; i++) {
-      if (typeof(functions[i]) === 'function') {
-        PubSub._storage[type].push(functions[i]);
+      // Add subsciption name to storage
+      if (!PubSub._storage[type]) {
+        PubSub._storage[type] = [];
+      }
+
+      for (j = 0; j < functions.length; j++) {
+        if (typeof(functions[j]) === 'function') {
+          PubSub._storage[type].push(functions[j]);
+        }
       }
     }
   };
 
   /**
    * Unsubscribe functions from an event
-   * @param  {String}         type      Event type
+   * @param  {String|Array}   types     Event types
    * @param  {Function|Array} functions Functions to unsubscribe from event
    * @return {void}
    */
-  PubSub.unsubscribe = function (type, functions) {
+  PubSub.unsubscribe = function (types, functions) {
     var index;
     var i = 0;
+    var j = 0;
+
+    // If `types` is not an array, make it one
+    if (typeof types === 'string') {
+      types = [types];
+    }
 
     // If `functions` is not an array, make it one
     if (!functions.length) {
       functions = [functions];
     }
 
-    // If the type does not exist, throw an error
-    if (!PubSub._storage[type]) {
-      throw new Error('Type ' + type + ' does not exist.');
-    }
+    for (; i < types.length; i++) {
+      type = types[i];
 
-    for (; i < functions.length; i++) {
-      index = PubSub._storage[type].indexOf(functions[i]);
+      // If the type does not exist, throw an error
+      if (!PubSub._storage[type]) {
+        throw new Error('Type ' + type + ' does not exist.');
+      }
 
-      PubSub._storage[type].splice(index, 1);
+      for (j = 0; j < functions.length; j++) {
+        index = PubSub._storage[type].indexOf(functions[j]);
+
+        PubSub._storage[type].splice(index, 1);
+      }
     }
   };
 
@@ -91,19 +114,29 @@ void function (global) {
    * Call functions subscribed to an event
    * If you want to publish multiple events, call PubSub.publish multiple times.
    *
-   * @param  {String} type Event type to publish
-   * @param  {Object} data Data to send with publish event
+   * @param  {String|Array} types Event types to publish
+   * @param  {Object}       data  Data to send with publish event
    * @return {void}
    */
-  PubSub.publish = function (type, data) {
+  PubSub.publish = function (types, data) {
     var i = 0;
+    var j = 0;
 
-    if (!PubSub._storage[type]) {
-      return;
+    // If `types` is not an array, make it one
+    if (typeof types === 'string') {
+      types = [types];
     }
 
-    for (; i < PubSub._storage[type].length; i++) {
-      PubSub._storage[type][i](data);
+    for (; i < types.length; i++) {
+      type = types[i];
+
+      if (!PubSub._storage[type]) {
+        return;
+      }
+
+      for (j = 0; j < PubSub._storage[type].length; j++) {
+        PubSub._storage[type][j](data);
+      }
     }
   };
 
