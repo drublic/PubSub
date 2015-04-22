@@ -19,7 +19,8 @@
  *   PubSub.publish(['App.undo', 'App.redo']);
  *
  */
-void function (global) {
+(function (global) {
+  'use strict';
 
   /**
    * Object to store all functions and data
@@ -46,6 +47,7 @@ void function (global) {
   PubSub.subscribe = function (types, functions) {
     var i = 0;
     var j = 0;
+    var type = '';
 
     // If `types` is not an array, make it one
     if (typeof types === 'string') {
@@ -83,6 +85,7 @@ void function (global) {
     var index;
     var i = 0;
     var j = 0;
+    var type = '';
 
     // If `types` is not an array, make it one
     if (typeof types === 'string') {
@@ -121,6 +124,7 @@ void function (global) {
   PubSub.publish = function (types, data) {
     var i = 0;
     var j = 0;
+    var type = '';
 
     // If `types` is not an array, make it one
     if (typeof types === 'string') {
@@ -159,4 +163,4 @@ void function (global) {
   } else if (typeof global === 'object' && typeof global.document === 'object') {
     global.PubSub = PubSub;
   }
-}(this);
+}(this));

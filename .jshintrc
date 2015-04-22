@@ -1,0 +1,56 @@
+/**!
+ * See http://www.jshint.com/docs/options/ for all available options.
+ */
+{
+  /**
+   * Enforcing options
+   * See http://www.jshint.com/docs/options/#enforcing-options
+   */
+  "bitwise": true,
+  "camelcase": true,
+  "curly": true,
+  "eqeqeq": true,
+  "immed": true,
+  "latedef": true,
+  "newcap": true,
+  "noarg": true,
+  "strict": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+
+  /**
+   * Relaxing options
+   * See http://www.jshint.com/docs/options/#relaxing-options
+   */
+  "eqnull": true,
+  "esnext": true,
+  "smarttabs": true,
+
+  /**
+   * Environments
+   * See http://www.jshint.com/docs/options/#environments
+   */
+  "browser": true,
+  "jquery": false,
+  "node": true,
+
+  /**
+   * Globals
+   * See http://www.jshint.com/docs/
+   */
+  "globals": {
+
+    // Jasmin
+    "jasmine": true,
+    "afterEach": true,
+    "beforeEach": true,
+    "describe": true,
+    "expect": true,
+    "it": true,
+    "sinon": true,
+
+    // AMD
+    "define": true
+  }
+}
