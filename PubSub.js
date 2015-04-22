@@ -130,8 +130,8 @@ void function (global) {
     for (; i < types.length; i++) {
       type = types[i];
 
-      if (!PubSub._storage[type]) {
-        return;
+      if (!PubSub._storage[type] || PubSub._storage[type].constructor !== Array) {
+        PubSub._storage[type] = [];
       }
 
       for (j = 0; j < PubSub._storage[type].length; j++) {

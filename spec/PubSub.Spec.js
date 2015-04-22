@@ -106,4 +106,10 @@ describe('PubSub', function () {
     PubSub.publish('publish');
     expect(this.fn).toHaveBeenCalled();
   });
+
+  it('publishes events even though there are no functions', function () {
+    expect(PubSub._storage.publish).toBeUndefined();
+
+    expect(PubSub.publish.bind(undefined, 'publish')).not.toThrow();
+  });
 });
