@@ -13,10 +13,15 @@
   },
   "homepage": "https://github.com/drublic/PubSub",
   "scripts": {
-    "test": "jasmine"
+   "coveralls": "rm -rf ./coverage && npm run istanbul && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+   "istanbul": "istanbul cover jasmine-node --captureExceptions spec/",
+   "jasmine": "jasmine-node --captureExceptions spec/",
+   "test": "npm run jasmine && npm run coveralls"
   },
   "devDependencies": {
-    "jasmine": "^2.1.1"
+    "coveralls": "^2.11.2",
+    "istanbul": "^0.3.13",
+    "jasmine-node": "^1.14.5"
   },
   "keywords": [
     "Events",

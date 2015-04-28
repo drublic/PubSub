@@ -4,6 +4,7 @@ PubSub is a JS implementation of a publication/subscription pattern in JS
 using vanilla JS.
 
 [![Build Status](https://api.travis-ci.org/drublic/PubSub.svg)](http://travis-ci.org/drublic/PubSub)
+[![Coverage Status](https://coveralls.io/repos/drublic/PubSub/badge.svg?branch=master)](https://coveralls.io/r/drublic/PubSub?branch=master)
 
 ## Install
 
